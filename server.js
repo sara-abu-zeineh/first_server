@@ -10,8 +10,8 @@ const server = http.createServer((req, res) => {
     const parsed = url.parse(req.url);
     const query  = querystring.parse(parsed.query);
     const queryString = req.url.slice(2, req.url.length);
-    const t = querystring.parse(queryString)
-    console.log(t, query, queryString)
+    // const t = querystring.parse(queryString)
+    // console.log(t, query, queryString)
 
     if (req.url === '/') {
         fs.readFile('./index.html', (err, data) => {
@@ -25,9 +25,9 @@ const server = http.createServer((req, res) => {
                 // res.end(data);
             }
         });
-    } else if (t.id) {
+    } else if (query.name) {
         res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(`Hello ${query.id}`);
+        res.write(`Hello ${query.name}`);
         res.end();
     } else {
         res.statusCode = 404;
